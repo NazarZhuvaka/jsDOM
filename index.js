@@ -1,142 +1,63 @@
-// console.log(this); // Window object . об'єкте уявлення браузера
-
-// alert('test') // window.alert('test')
-
-// console.dir(document);
-
 /*
+    Конвертер валют
 
-    1. Всі елементи на сторінці - об'єкти
-    2. Всі елементи можна підписати на події
+
+    Декомпозиція:
+        1. Створити html-сторінку з формою, яка містить два поля вводу:
+        одне поле для введення суми в одній валюті
+        інше поле - для вибору валют, в яку будем конвертувати 
+
+        2. Додати кнопку "конвертувати"
+
+        3. Написати js обробник події відправки форми:
+            - отримати значення введеної суми та обраної валюти
+            - обчислити конвертовану суму
+            - вивести результат конвертації на сторінку
+
+        4. Підписати форму на подію "submit", в якості лісенера викликати функціб з п.3
 
 */
 
-// function getAlert(event) {
-//   // приходить сам об'єкт події
-//   // alert('привіт');
-//   const btn = event.target;
+const CURRENCY = {
+    USD_TO_UA: 37.65,
+    EUR_TO_UA: 40.61,
+}
 
-// //   btn.style.backgroundColor = "red";
+const converterForm = document.querySelector("#currency-converter-form")
 
-//   if (btn.style.backgroundColor === "red") {
-//     btn.style.backgroundColor = 'unset'
-//   } else {
-//     btn.style.backgroundColor = "red";
-//   }
+converterForm.addEventListener('submit', convertHandler)
 
-//   console.log(event);
-// }
+function convertHandler(event) {
+    event.preventDefault();
 
-// const btnElement = document.getElementById("btn");
-// // console.log(btnElement);
+    const amount = Number(document.querySelector("#amount").value);
+    const currency = document.querySelector('#currency').value
 
-// btnElement.addEventListener("click", getAlert);
-// 1 варіант: зареєстрували обробник події натискання миші на кнопку
-// 2 варіант: навісили обробник натискання миші на кнопку
+    let convertedAmout;
 
+    const {USD_TO_UA: usdCourse, EUR_TO_UA: eurCourse} = CURRENCY
 
-// const noBtn = document.getElementById('no-btn')
+    switch(currency) {
+        case 'USD': {
+            convertedAmout = amount * usdCourse;
+            break
+        }
+        case 'EUR': {
+            convertedAmout = amount * eurCourse
+            break
+        }
+        default: throw new Error('Something problem')
+    }
 
-// function hideElem(event) { // приходить об'єкт події
-//     // const btn = event.target;
-//     // btn.style.display = 'none'
-
-//     event.target.removeEventListener('mouseenter', hideElem);
-//     console.log('test'); // спрацює 1 раз
-// }
-
-// noBtn.addEventListener('mouseenter', hideElem); // хоч кнопки і немає , але обробник подій досі є
-
-// // noBtn.addEventListener('mouseenter', (event) => {
-// //     console.log(event);
-// //     // removeEventListener('mouseenter', hideElem); // не зможемо виконати
-// // }); 
-
-
-// const form = document.getElementById('name-form');
-
-// form.addEventListener('submit', welcomeFunc)
-
-// function welcomeFunc(event) {
-//   event.preventDefault()
-
-//   const form = event.target
-//   const value = form[0].value
-
-//   alert(value)
-// }
-
-// form.addEventListener('submit', consoleForm )
-
-// function consoleForm(event) {
-//   event.preventDefault();
-//   // console.log(event);
-
-//   const form = event.target
-//   const value = form[0].value
-//   console.dir(form[0]);
-//   console.log(value);
-// }
-// alert('asd')
-
-// const collection = document.getElementsByClassName('paragraph') // верне масивоподібний елемент
-
-// console.log(collection);
-
-// // for(let i = 0; collection.length; i++) {
-// //   collection[i].style.color = 'green'
-// // }
-
-// // for .. of - спеціальний цикл, який перебирає об'єк по ключам
-
-// for(let p of collection){
-//   p.style.color = 'green'
-// }
-
-// const buttons = document.getElementsByTagName('button'); // масивоподібний об'єкт
-// const arr = [...buttons] // створиться масив // prototype array
-
-// console.log(buttons);
-// console.log(arr);
-
-// arr.forEach((item) => {
-//   item.style.color = 'red'
-// });
-// // Array.from(buttons)
-
-// function hello(event) {
-//   console.log(event);
-//   console.log('hello')
-
-//   event.target.removeEventListener('click', hello)
-// }
-
-// for (let btn of buttons) {
-//   btn.addEventListener('click', hello)
-// }
-
-
-// const btn = document.querySelector('button');
-// // console.log(btn);
-
-// const btn2 = document.querySelector('.super-btn');
-// // console.log(btn2);
-
-// const btn3 = document.querySelector('#btn')
-// // console.log(btn3);
-
-// const btns = document.querySelectorAll("button")
-// console.log(btns);
-
-// const paragraphCollection = document.querySelectorAll('.paragraph:nth-child(even)')
-
-// paragraphCollection[0].innerHTML = 'test' // краще НЕ використовувати
-
-// for(let p of paragraphCollection) {
-//   p.style.color = 'red'
-//   p.style.backgroundColor = 'yellow'
-// }
-
-// console.log(paragraphCollection);
+    // if (currency === 'USD'){
+    //     convertedAmout = amount * usdCourse
+    // } else if (currency === 'EUR'){
+    //     convertedAmout = amount * eurCourse
+    // } else {
+    //     throw new Error('Something problem')
+    // }
+    const resultDiv = document.querySelector('#result')
+    resultDiv.innerHTML = `${amount} ${currency} = ${convertedAmout.toFixed(2)} UA`
+}
 
 
