@@ -12,3 +12,8 @@
 .bg-color-green {
     background-color: green;
 }
+
+.bg-color-black {
+    color: white;
+    background-color: black;
+}

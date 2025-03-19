@@ -93,3 +93,60 @@
 
 
 // Зміна теми сайту
+
+// const body = document.querySelector('body')
+// const body = document.body; // працює тільки з body
+
+// const btn = document.querySelector('.switch-btn')
+
+// btn.addEventListener('click', switchColor)
+
+// function switchColor(event) { // обробник події
+//     console.log(event);
+//     body.classList.toggle('bg-color-black')
+// }
+
+// const event = new Event('click');
+// console.log(event.composedPath());
+
+const btn = document.querySelector('button')
+
+btn.addEventListener('click', btnClickHandler)
+
+function btnClickHandler(event) { // об'єкт івенту
+    // console.log(event);
+    // console.log(event.composedPath());
+    // alert('Hello');
+
+    // console.dir(event.target); // той на якому спрацювала подія
+    // target - елемент на якому сталася подія (ціль)
+    // target - елемент до якого подія буде занурюватися
+    // console.dir(event.currentTarget) // той якому належить eventListener
+    // currentTarget - елемент якому належав обробник подій
+
+    console.log('hi ftom BUTTOM click handler');
+}
+
+document.body.addEventListener('click', bodyClickHandler)
+
+function bodyClickHandler() {
+    console.log('hi ftom bodi click handler');
+}
+
+const clickEvent = new MouseEvent('click')
+
+// btn.dispatchEvent(clickEvent)
+
+/*
+    3 Фази події
+
+        1. Фаза занурення
+            Подія стається на рівні ОС, ОС передає подію браузеру(Window), той передає подію document -> body -> ... елемент, на якому сталася подія
+        
+        2. Фаза цілі
+            Подія досягла елемента, елемент - це таргет
+            
+        3. Фаза всплиття.
+            Подія починає вспливати у зворотньому напрямку, тобто від елемента (таргета) до ОС
+*/
+
