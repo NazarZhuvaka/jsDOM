@@ -109,31 +109,31 @@
 // const event = new Event('click');
 // console.log(event.composedPath());
 
-const btn = document.querySelector('button')
+// const btn = document.querySelector('button')
 
-btn.addEventListener('click', btnClickHandler)
+// btn.addEventListener('click', btnClickHandler)
 
-function btnClickHandler(event) { // об'єкт івенту
-    // console.log(event);
-    // console.log(event.composedPath());
-    // alert('Hello');
+// function btnClickHandler(event) { // об'єкт івенту
+//     // console.log(event);
+//     // console.log(event.composedPath());
+//     // alert('Hello');
 
-    // console.dir(event.target); // той на якому спрацювала подія
-    // target - елемент на якому сталася подія (ціль)
-    // target - елемент до якого подія буде занурюватися
-    // console.dir(event.currentTarget) // той якому належить eventListener
-    // currentTarget - елемент якому належав обробник подій
+//     // console.dir(event.target); // той на якому спрацювала подія
+//     // target - елемент на якому сталася подія (ціль)
+//     // target - елемент до якого подія буде занурюватися
+//     // console.dir(event.currentTarget) // той якому належить eventListener
+//     // currentTarget - елемент якому належав обробник подій
 
-    console.log('hi ftom BUTTOM click handler');
-}
+//     console.log('hi ftom BUTTOM click handler');
+// }
 
-document.body.addEventListener('click', bodyClickHandler)
+// document.body.addEventListener('click', bodyClickHandler)
 
-function bodyClickHandler() {
-    console.log('hi ftom bodi click handler');
-}
+// function bodyClickHandler() {
+//     console.log('hi ftom bodi click handler');
+// }
 
-const clickEvent = new MouseEvent('click')
+// const clickEvent = new MouseEvent('click')
 
 // btn.dispatchEvent(clickEvent)
 
@@ -150,3 +150,30 @@ const clickEvent = new MouseEvent('click')
             Подія починає вспливати у зворотньому напрямку, тобто від елемента (таргета) до ОС
 */
 
+
+const button = document.querySelector('button');
+const div = document.querySelector('#root');
+
+function eventHandlerButton(event) {
+    // target - на кому спрацювала подія
+    console.log('Hi from BUTTOM handler');
+    console.dir(event.currentTarget); // той кому належав обробник події
+}
+
+function eventHandlerBody(event) {
+    // target - на кому спрацювала подія
+    console.log('Hi from BODY handler');
+    console.dir(event.currentTarget); // той кому належав обробник події
+    event.stopPropagation()
+    
+    console.log(this);
+    // Всередині Function Declaration and Function Expression, this -> body
+    // Arrow Function, this -> window
+}
+
+// stopPropagation()
+
+button.addEventListener('click', eventHandlerButton, {capture: true});
+// div.addEventListener('click', eventHandler, {capture: true});
+document.body.addEventListener('click', eventHandlerBody, {capture: true});
+// window.addEventListener('click', eventHandler, {capture: true});
