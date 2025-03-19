@@ -63,8 +63,33 @@
 
 
 /*
-
     Маємо div
     Маємо 2 кнопки: зробити червоним і зробити зеленим
     за натисненням кнопки на фоновий колір div має змінитися за div
 */
+
+// const div = document.querySelector('#box');
+// console.log(div.classList); // поверне псевдо масив з класами елементами
+
+// div.classList.remove('bg-color-red')
+
+// console.log(div.classList);
+
+// const [redBtn, greenBtn] = document.querySelectorAll('.btn');
+
+// redBtn.addEventListener('click', redBtnHandler);
+
+// function redBtnHandler(event) {
+//     // div.style.backgroundColor = 'red'
+//     div.classList.toggle('bg-color-red')
+// }
+
+// greenBtn.addEventListener('click', greenBtnHandler);
+
+// function greenBtnHandler(event) {
+//     div.classList.toggle('bg-color-green')
+// }
+
+
+
+// Зміна теми сайту
