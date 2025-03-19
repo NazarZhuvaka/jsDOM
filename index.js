@@ -151,29 +151,62 @@
 */
 
 
-const button = document.querySelector('button');
-const div = document.querySelector('#root');
+// const button = document.querySelector('button');
+// const div = document.querySelector('#root');
 
-function eventHandlerButton(event) {
-    // target - на кому спрацювала подія
-    console.log('Hi from BUTTOM handler');
-    console.dir(event.currentTarget); // той кому належав обробник події
-}
+// function eventHandlerButton(event) {
+//     // target - на кому спрацювала подія
+//     console.log('Hi from BUTTOM handler');
+//     console.dir(event.currentTarget); // той кому належав обробник події
+// }
 
-function eventHandlerBody(event) {
-    // target - на кому спрацювала подія
-    console.log('Hi from BODY handler');
-    console.dir(event.currentTarget); // той кому належав обробник події
-    event.stopPropagation()
+// function eventHandlerBody(event) {
+//     // target - на кому спрацювала подія
+//     console.log('Hi from BODY handler');
+//     console.dir(event.currentTarget); // той кому належав обробник події
+//     event.stopPropagation()
     
-    console.log(this);
-    // Всередині Function Declaration and Function Expression, this -> body
-    // Arrow Function, this -> window
+//     console.log(this);
+//     // Всередині Function Declaration and Function Expression, this -> body
+//     // Arrow Function, this -> window
+// }
+
+// // stopPropagation()
+
+// button.addEventListener('click', eventHandlerButton, {capture: true});
+// // div.addEventListener('click', eventHandler, {capture: true});
+// document.body.addEventListener('click', eventHandlerBody, {capture: true});
+// // window.addEventListener('click', eventHandler, {capture: true});
+
+
+// const button = document.querySelector('button');
+// console.dir(button)
+// 
+// button.addEventListener('click', clickHandler);
+// 
+// function clickHandler({target}) {
+    // console.log(target);
+    // target.disabled = true
+// }
+
+const buttons = document.querySelectorAll('button') // псевдомасив Nodelist
+const div = document.querySelector('#root')
+
+console.dir(buttons) // dataset
+
+// for(let i = 0; i < buttons.length; i++) {
+//     buttons[i].addEventListener('click', clickHandler)
+// }
+
+// parentNode
+
+for(let btn of buttons) {
+    btn.addEventListener('click', clickHandler)
 }
 
-// stopPropagation()
+function clickHandler({target: {dataset: {color}, parentNode}}){
+    // const {dataset: {color}} = target
+    // const {parentNode} = target
 
-button.addEventListener('click', eventHandlerButton, {capture: true});
-// div.addEventListener('click', eventHandler, {capture: true});
-document.body.addEventListener('click', eventHandlerBody, {capture: true});
-// window.addEventListener('click', eventHandler, {capture: true});
+    parentNode.style.backgroundColor = color
+}
