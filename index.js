@@ -12,8 +12,9 @@ function clickHandler(event) {
     if(event.currentTarget === event.target) {
         const {target: {children: {box}}, clientX, clientY} = event
         // якшо ми натискаємо на ігрове поле - переміщеню бути
-
-        box.style.top = `${clientY}px`
-        box.style.left = `${clientX}px`
+        console.log(clientY);
+        console.log(box.offsetHeight);
+        box.style.top = `${clientY - (box.offsetHeight / 2)}px`
+        box.style.left = `${clientX - (box.offsetWidth / 2)}px`
     }
 }
