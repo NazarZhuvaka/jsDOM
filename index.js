@@ -221,7 +221,7 @@
 //     // console.dir(target.parentNode); // body
 //     const img = target.parentNode.children[0];
 //     // img.setAttribute(name, value)
-//     const {src} = target.dataset
+//     const {src} = target.dataset 
 //     img.setAttribute('src', src)
 // }
 
@@ -230,18 +230,18 @@
 
 // document.body.append(div) // приєднуємо створений елемет до body
 
-// вузлом може бути html-елмент або текст
-function createDiv() {
-    const div = document.createElement('div') // створюємо елемент у пам'яті <div></div>
-    div.classList.add('box') // до елементу приєднуємо стильовий клас <div class="box"></div>
-    div.append('Hello world!') // до цього елементу приєднуємо текстовий узол <div class="box">Hello world</div>
-    document.body.append(div) // приєднуємо створений елемет до body (завжди дбавляє в кінець) -->
-    /*
-        <body>
-            <div class="box">Hello world</div>
-        </body>
-    */
-}
+// // вузлом може бути html-елмент або текст
+// function createDiv() {
+//     const div = document.createElement('div') // створюємо елемент у пам'яті <div></div>
+//     div.classList.add('box') // до елементу приєднуємо стильовий клас <div class="box"></div>
+//     div.append('Hello world!') // до цього елементу приєднуємо текстовий узол <div class="box">Hello world</div>
+//     document.body.append(div) // приєднуємо створений елемет до body (завжди дбавляє в кінець) -->
+//     /*
+//         <body>
+//             <div class="box">Hello world</div>
+//         </body>
+//     */
+// }
 
-const btn = document.querySelector('button')
-btn.addEventListener('click', createDiv)
+// const btn = document.querySelector('button')
+// btn.addEventListener('click', createDiv)
