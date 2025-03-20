@@ -189,24 +189,38 @@
     // target.disabled = true
 // }
 
-const buttons = document.querySelectorAll('button') // псевдомасив Nodelist
-const div = document.querySelector('#root')
+// const buttons = document.querySelectorAll('button') // псевдомасив Nodelist
+// const div = document.querySelector('#root')
 
-console.dir(buttons) // dataset
+// console.dir(buttons) // dataset
 
-// for(let i = 0; i < buttons.length; i++) {
-//     buttons[i].addEventListener('click', clickHandler)
+// // for(let i = 0; i < buttons.length; i++) {
+// //     buttons[i].addEventListener('click', clickHandler)
+// // }
+
+// // parentNode
+
+// for(let btn of buttons) {
+//     btn.addEventListener('click', clickHandler)
 // }
 
-// parentNode
+// function clickHandler({target: {dataset: {color}, parentNode}}){
+//     // const {dataset: {color}} = target
+//     // const {parentNode} = target
 
-for(let btn of buttons) {
-    btn.addEventListener('click', clickHandler)
-}
+//     parentNode.style.backgroundColor = color
+// }
 
-function clickHandler({target: {dataset: {color}, parentNode}}){
-    // const {dataset: {color}} = target
-    // const {parentNode} = target
 
-    parentNode.style.backgroundColor = color
+const [btn1, btn2] = document.querySelectorAll('button');
+
+btn1.addEventListener('click', clickHandler);
+btn2.addEventListener('click', clickHandler);
+
+function clickHandler({target}) {
+    // console.dir(target.parentNode); // body
+    const img = target.parentNode.children[0];
+    // img.setAttribute(name, value)
+    const {src} = target.dataset
+    img.setAttribute('src', src)
 }
