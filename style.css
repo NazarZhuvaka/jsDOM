@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+#game-field {
+  background-color: rgb(152, 227, 227);
+  border: 1px solid grey;
+  width: 500px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+#box {
+  width: 50px;
+  height: 50px;
+  background-color: aquamarine;
+  border: 2px solid black;
+  position: absolute;
+}
