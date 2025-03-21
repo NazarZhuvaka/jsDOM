@@ -1,34 +1,100 @@
 const root = document.querySelector('#root')
 
 function createUserCard(user) {
-    // 1. Створення article
-    const article = document.createElement('article');
-    article.classList.add('card-wrapper');
+    // 1. Створити обгортку для картинки
+    const imgWrapper = createImageWrapper(user);
 
-    // 2. Створення картинки
-    const img = document.createElement('img');
-    img.setAttribute('src', user.profilePicture);
-    img.setAttribute('alt', user.name);
-    img.classList.add('card-image');
+    // 2. Створення h2
+    const h2 = createElement('h2', {classNames: ['username']}, user.name)
 
-    // 3. Створення h2
-    const h2 = document.createElement('h2');
-    h2.append(user.name);
-    h2.classList.add('username');
+    // 3. Створення p
+    const p = createElement('p', {classNames: ['description']}, user.description)
 
-    // 4. Створення p
-    const p = document.createElement('p');
-    p.append(user.description);
-    p.classList.add('description');
-
-    // 5. Приєднати до артікла(п.1) елементи сстворенні в пункті 2-4
-    article.append(img, h2, p);
-
-    // 6. Повертаємо створення article
-    return article
+    // 4. Створюємо і повертаємо article
+    return createElement('article', {classNames: ['card-wrapper']}, imgWrapper, h2, p) 
 }
 
 const cardArray = data.map(user => createUserCard(user))
 
 root.append(...cardArray)
 
+/**
+ * 
+ * @param {String} type - тег елементи який нам треба створити 
+ * @param {String[]} classNames - список класів, які треба додати до елемента
+ * @param  {...Node} childNodes - список дочірніхх вузлів
+ * @returns {HTMLElement}  
+ */
+function createElement(type, {classNames}, ...childNodes) {
+    const elem = document.createElement(type);
+    elem.classList.add(...classNames);
+    elem.append(...childNodes);
+
+    return elem;
+}
+
+function imageLoadHandler({target}) {
+    // console.log('image succes loaded');
+    // console.log(target);
+    const parentWrapper = document.querySelector(`#wrapper${target.dataset.id}`)
+    // parentWrapper.removeChild(document.querySelector('.user-initial'))
+    // console.log(parentWrapper.children[0]);
+    parentWrapper.children[0].remove()
+    parentWrapper.append(target);
+
+}
+
+function imageErrorHandler({target}) {
+    target.remove()
+    console.log('image loading has erorr');
+
+    createUserInitial(target)
+}
+
+
+function createUserImage(user) {
+    const img = document.createElement('img');
+    img.setAttribute('src', user.profilePicture);
+    img.setAttribute('alt', user.name);
+    img.dataset.id = user.id
+    img.classList.add('card-image');
+
+    img.addEventListener('load', imageLoadHandler)
+    img.addEventListener('error', imageErrorHandler)
+
+    return img
+}
+
+function createUserInitial(user) {
+    return createElement('p', {classNames: ['user-initial']}, user.name[0])
+}
+
+function createImageWrapper(user) {
+    // 1. Створення заглушки
+    const imgWrapper = createElement('div', {classNames: ["image-wrapper"]});
+    imgWrapper.setAttribute('id', `wrapper${user.id}`)
+
+    // 2. Визначаємо bg-color заглушки з урахуванням іменні користувача
+    imgWrapper.style.backgroundColor = stringToColour(user.name)
+
+    // 3. Створення картинки
+    createUserImage(user);
+
+    // 4. Створення першої букви ім'я юзера
+    imgWrapper.append(createUserInitial(user))
+    
+    return imgWrapper
+}
+
+function stringToColour(str) {
+    let hash = 0;
+    str.split('').forEach(char => {
+      hash = char.charCodeAt(0) + ((hash << 5) - hash)
+    })
+    let colour = '#'
+    for (let i = 0; i < 3; i++) {
+      const value = (hash >> (i * 8)) & 0xff
+      colour += value.toString(16).padStart(2, '0')
+    }
+    return colour
+}

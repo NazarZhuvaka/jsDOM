@@ -18,7 +18,7 @@ const data = [
         id: 4,
         name: 'Iness',
         description: 'Description for Iness',
-        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Portrait_of_Neytiri.jpg'
+        profilePicture: '11https://upload.wikimedia.org/wikipedia/commons/e/e2/Portrait_of_Neytiri.jpg'
     }, {
         id: 5,
         name: 'Alex',
@@ -33,7 +33,7 @@ const data = [
         id: 7,
         name: 'Tracy',
         description: 'Description for Tracy',
-        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Portrait_of_Neytiri.jpg'
+        profilePicture: '11https://upload.wikimedia.org/wikipedia/commons/e/e2/Portrait_of_Neytiri.jpg'
     }, {
         id: 8,
         name: 'James',

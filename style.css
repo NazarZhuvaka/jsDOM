@@ -19,8 +19,29 @@
 }
 
 .card-image {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+
+  z-index: 1;
+  position: relative;
+}
+
+.image-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  object-fit: cover;
+  background-color: black;
+  position: relative;
+}
+
+.user-initial {
+  position: absolute;
+  color: white;
+  font-size: 44px;
 }
