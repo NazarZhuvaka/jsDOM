@@ -1,20 +1,34 @@
-const field = document.querySelector('#game-field');
-const box = document.querySelector('#box');
+const root = document.querySelector('#root')
 
-field.addEventListener('click', clickHandler); //{capture: true}
+function createUserCard(user) {
+    // 1. Створення article
+    const article = document.createElement('article');
+    article.classList.add('card-wrapper');
 
-function clickHandler(event) {
-    // якщо ми натискаємо НЕ на ігрове поле - переміщеня не відбувається
-    // event.stopPropagation()
+    // 2. Створення картинки
+    const img = document.createElement('img');
+    img.setAttribute('src', user.profilePicture);
+    img.setAttribute('alt', user.name);
+    img.classList.add('card-image');
 
-    // target - на якому елементі фактично відбувалася подія (на який саме клікнули)
-    // currentTarget - якому елменту належав належав оброник подіх
-    if(event.currentTarget === event.target) {
-        const {target: {children: {box}}, clientX, clientY} = event
-        // якшо ми натискаємо на ігрове поле - переміщеню бути
-        console.log(clientY);
-        console.log(box.offsetHeight);
-        box.style.top = `${clientY - (box.offsetHeight / 2)}px`
-        box.style.left = `${clientX - (box.offsetWidth / 2)}px`
-    }
+    // 3. Створення h2
+    const h2 = document.createElement('h2');
+    h2.append(user.name);
+    h2.classList.add('username');
+
+    // 4. Створення p
+    const p = document.createElement('p');
+    p.append(user.description);
+    p.classList.add('description');
+
+    // 5. Приєднати до артікла(п.1) елементи сстворенні в пункті 2-4
+    article.append(img, h2, p);
+
+    // 6. Повертаємо створення article
+    return article
 }
+
+const cardArray = data.map(user => createUserCard(user))
+
+root.append(...cardArray)
+
