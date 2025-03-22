@@ -34,14 +34,13 @@ function createElement(type, {classNames}, ...childNodes) {
 }
 
 function imageLoadHandler({target}) {
-    // console.log('image succes loaded');
-    // console.log(target);
-    const parentWrapper = document.querySelector(`#wrapper${target.dataset.id}`)
-    // parentWrapper.removeChild(document.querySelector('.user-initial'))
-    // console.log(parentWrapper.children[0]);
-    parentWrapper.children[0].remove()
-    parentWrapper.append(target);
+    const parentWrapper = target.parentElement; // Отримуємо батька напряму
+    if (!parentWrapper) return; // Якщо картинка не завантажилась - далі не йдемо
 
+    const initial = parentWrapper.querySelector('.user-initial');
+    if (initial) initial.remove(); // Видаляємо першу букву тільк якщо вона реально є
+
+    target.style.display = 'block'; // коли картинка провантажилась - показуємо її
 }
 
 function imageErrorHandler({target}) {
@@ -56,8 +55,9 @@ function createUserImage(user) {
     const img = document.createElement('img');
     img.setAttribute('src', user.profilePicture);
     img.setAttribute('alt', user.name);
-    img.dataset.id = user.id
     img.classList.add('card-image');
+
+    img.style.display = 'none'; // картинка починає завантажуватись. поки не завантажиться повністю - скриваємо картинку
 
     img.addEventListener('load', imageLoadHandler)
     img.addEventListener('error', imageErrorHandler)
@@ -72,16 +72,17 @@ function createUserInitial(user) {
 function createImageWrapper(user) {
     // 1. Створення заглушки
     const imgWrapper = createElement('div', {classNames: ["image-wrapper"]});
-    imgWrapper.setAttribute('id', `wrapper${user.id}`)
 
     // 2. Визначаємо bg-color заглушки з урахуванням іменні користувача
     imgWrapper.style.backgroundColor = stringToColour(user.name)
 
     // 3. Створення картинки
-    createUserImage(user);
+    const img = createUserImage(user);
 
     // 4. Створення першої букви ім'я юзера
-    imgWrapper.append(createUserInitial(user))
+    const initial = createUserInitial(user);
+
+    imgWrapper.append(initial, img);
     
     return imgWrapper
 }
