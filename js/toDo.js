@@ -1,44 +1,48 @@
-// const toDoForm = document.querySelector("#currency-form");
+const toDoForm = document.querySelector("#currency-form");
 
-// toDoForm.addEventListener("submit", postHandler);
+toDoForm.addEventListener("submit", postHandler);
 
-// function postHandler(event) {
-//   event.preventDefault();
-//   const formInput = document.querySelector("#form-input").value
-//   const toDoTasks = document.querySelector('.to-do-tasks')
+function postHandler(event) {
+  event.preventDefault();
+  const formInput = document.querySelector("#form-input").value
+  const toDoTasks = document.querySelector('.to-do-tasks')
 
-//   toDoTasks.append(createTask(formInput))
+  toDoTasks.append(createTask(formInput))
 
-// }
+}
 
-// function createTask(taskValue) {
+function createTask(taskValue) {
 
-//   const p = createElement('p', {classNames: ['1']}, taskValue)
+  const p = createElement('p', {classNames: ['paragraph']}, taskValue)
+  console.log(p);
+  const input = createElement('input', {classNames: ['input']}, taskValue)
+  input.setAttribute('type', 'checkbox')
+  input.addEventListener('click', delineHandler)
 
-//   const input = createElement('input', {classNames: ['2']}, taskValue)
-//   input.setAttribute('type', 'checkbox')
+  const checkboxWrapper = createElement('div', {classNames: ['checkbox-wrapper']},input, p)
 
-//   const checkboxWrapper = createElement('div', {classNames: ['checkbox-wrapper']},input, p)
+  const btn = createElement('button', {classNames: ['btn']}, 'del')
 
-//   const btn = createElement('button', {classNames: ['btn']}, 'del')
+  btn.addEventListener('click', delHandler)
 
-//   return createElement('article', {classNames: ['task']}, checkboxWrapper, btn)
-// }
+  return createElement('article', {classNames: ['task']}, checkboxWrapper, btn)
+}
 
-// function createElement(type, {classNames}, ...childNodes) {
-//   const elem = document.createElement(type);
-//   elem.classList.add(...classNames);
-//   elem.append(...childNodes);
+function createElement(type, {classNames}, ...childNodes) {
+  const elem = document.createElement(type);
+  elem.classList.add(...classNames);
+  elem.append(...childNodes);
 
-//   return elem;
-// }
+  return elem;
+}
 
+function delHandler({target}){
+  target.parentElement.style.display = 'none'
+}
 
-// const btn = document.querySelector('.btn')
+function delineHandler({target}) {
+    const p = target.nextElementSibling
+    p.classList.remove('checked')
 
-// btn.addEventListener('click', delHandler)
-
-// function delHandler(){
-//   const article = document.querySelector('.task')
-//   article.style.display = 'none'
-// }
+    if(target.checked) p.classList.add('checked') 
+}
