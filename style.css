@@ -45,3 +45,64 @@
   color: white;
   font-size: 44px;
 }
+/* * {
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(106,9,121,1) 100%); 
+}
+
+#root {
+  margin: 0 auto;
+  padding: 8px 12px;
+  max-width: 400px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  background-color: #f0f8ffe8;
+}
+
+#currency-form {
+  display: flex;
+  justify-content: space-between;
+  max-width: 70%;
+  height: 30px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+#form-input {
+  border: none;
+  background-color: inherit;
+  border-radius: 8px;
+  outline: none;
+
+}
+
+#btn{
+  border: none;
+  background-color: orange;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+}
+
+.checkbox-wrapper{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.to-do-tasks{
+  display: flex;
+  flex-direction: column;
+} */
+
