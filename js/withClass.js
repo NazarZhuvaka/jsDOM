@@ -1,5 +1,5 @@
 class Card {
-  constructor(type, {classNames} , ...childNodes) {
+  constructor(type, { classNames} , ...childNodes) {
     if (!type) {
       throw new Error("Write a type of element");
     }
